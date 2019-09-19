@@ -1,22 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import {
-  getSeconds,
-  getMinutes,
-  getHours,
-  getDate,
-  getMonth,
-  getYear,
-  setSeconds,
-  setMinutes,
-  setHours,
-  setDate,
-  setMonth,
-  setYear,
-  getDaysInMonth
-} from 'date-fns';
-import {
-  CalendarView
-} from 'angular-calendar';
+import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -37,18 +19,80 @@ export class AppComponent implements OnInit{
   
   viewDate: Date = new Date();
 
+  firstDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+
   ngOnInit() {
-    
     for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
 
-      this.dateType = {
-        day: _i,
-        month: getMonth(this.viewDate) + 1,
-        year: getYear(this.viewDate)
-      }
+      //this.dateType = {
+      //  day: _i,
+      //  month: getMonth(this.viewDate),
+      //  year: getYear(this.viewDate)
+      //}
 
       this.state.push(this.dateType);
     }
+    console.log(this.viewDate);
+  }
+
+  
+
+  next() {
+
+    this.state = [
+    ];
+
+    
+    
+    this.viewDate.setMonth(this.viewMonth);
+    for(var _m = 1; _m <= getMonth(this.viewDate); _m++){
+
+        for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
+            console.log(_i);
+
+            this.dateType = {
+              day: _i,
+              month: _m,
+              year: getYear(this.viewDate)
+            }
+        
+            this.state.push(this.dateType);
+        }
+    }
+    this.viewMonth++;
+
+    this.state.map(item => {
+      console.log(item);
+    })
+    
+    
+    
+
+    //this.viewDate.setMonth(x++);
+
+  }
+
+  previous() {
+    this.viewDate.setMonth(this.viewMonth);
+
+    this.state = [
+    ];
+
+    for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
+        console.log(_i);
+
+        this.dateType = {
+          day: _i,
+          month: getMonth(this.viewDate),
+          year: getYear(this.viewDate)
+        }
+    
+        this.state.push(this.dateType);
+    }
+    this.viewMonth--;
+
+    
+
     this.state.map(item => {
       console.log(item);
     })
