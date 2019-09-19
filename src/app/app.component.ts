@@ -1,4 +1,5 @@
 import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-root',
@@ -10,93 +11,45 @@ import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
 export class AppComponent implements OnInit{
 
   state: any [] = [];
-
-  dateType: {
-    day: number,
-    month: number,
-    year: number
-  };
   
   viewDate: Date = new Date();
 
   firstDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
 
+  lastDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
+
   ngOnInit() {
-    for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
-
-      //this.dateType = {
-      //  day: _i,
-      //  month: getMonth(this.viewDate),
-      //  year: getYear(this.viewDate)
-      //}
-
-      this.state.push(this.dateType);
+    for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
+      console.log(this.firstDay);
+      this.firstDay.setDate(this.firstDay.getDate()+1);
     }
-    console.log(this.viewDate);
+  }
+
+  next() {
+    this.viewDate.setMonth(this.viewDate.getMonth()+1);
+
+    this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+
+    this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
+
+    for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
+      console.log(this.firstDay);
+      this.firstDay.setDate(this.firstDay.getDate()+1);
+    }
   }
 
   
-
-  next() {
-
-    this.state = [
-    ];
-
-    
-    
-    this.viewDate.setMonth(this.viewMonth);
-    for(var _m = 1; _m <= getMonth(this.viewDate); _m++){
-
-        for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
-            console.log(_i);
-
-            this.dateType = {
-              day: _i,
-              month: _m,
-              year: getYear(this.viewDate)
-            }
-        
-            this.state.push(this.dateType);
-        }
-    }
-    this.viewMonth++;
-
-    this.state.map(item => {
-      console.log(item);
-    })
-    
-    
-    
-
-    //this.viewDate.setMonth(x++);
-
-  }
-
   previous() {
-    this.viewDate.setMonth(this.viewMonth);
+    this.viewDate.setMonth(this.viewDate.getMonth()-1);
 
-    this.state = [
-    ];
+    this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
 
-    for(var _i = 1; _i <= getDaysInMonth(this.viewDate); _i++) {
-        console.log(_i);
+    this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
-        this.dateType = {
-          day: _i,
-          month: getMonth(this.viewDate),
-          year: getYear(this.viewDate)
-        }
-    
-        this.state.push(this.dateType);
+    for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
+      console.log(this.firstDay);
+      this.firstDay.setDate(this.firstDay.getDate()+1);
     }
-    this.viewMonth--;
-
-    
-
-    this.state.map(item => {
-      console.log(item);
-    })
   }
-    
   
 }
