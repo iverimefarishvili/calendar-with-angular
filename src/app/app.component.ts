@@ -1,5 +1,6 @@
 import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class AppComponent implements OnInit{
 
-  state: any [] = [];
+  
   
   viewDate: Date = new Date();
 
@@ -18,11 +19,28 @@ export class AppComponent implements OnInit{
 
   lastDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
+  state: Date [] = [];
+
   ngOnInit() {
+    
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
-      console.log(this.firstDay);
+      
+      //this.state = [
+      //  ...this.state,
+      //  {this.firstDay}
+      //]
+        
+      //console.log(this.firstDay);
+      this.state.push(new Date(this.firstDay));
+      //console.log(this.state);
+      //this.state.push(this.firstDay);
+    
       this.firstDay.setDate(this.firstDay.getDate()+1);
     }
+    this.state.map( item => {
+      console.log(item);
+    })
+    //console.log(this.state)
   }
 
   next() {
@@ -33,9 +51,14 @@ export class AppComponent implements OnInit{
     this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
-      console.log(this.firstDay);
+      this.state.push(new Date(this.firstDay));
+
       this.firstDay.setDate(this.firstDay.getDate()+1);
     }
+
+    this.state.map( item => {
+      console.log(item);
+    })
   }
 
   
@@ -47,9 +70,14 @@ export class AppComponent implements OnInit{
     this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
-      console.log(this.firstDay);
+      this.state.push(new Date(this.firstDay));
+
       this.firstDay.setDate(this.firstDay.getDate()+1);
     }
+
+    this.state.map( item => {
+      console.log(item);
+    })
   }
   
 }
