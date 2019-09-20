@@ -10,17 +10,11 @@
         <time datetime="2019-02">  </time>
       </div>
       <div class="day-of-week">
-        <div>Su</div>
-        <div>Mo</div>
-        <div>Tu</div>
-        <div>We</div>
-        <div>Th</div>
-        <div>Fr</div>
-        <div>Sa</div>
+        <div *ngFor="let item of weekdays">{{ item }} </div>
       </div>
       <div class="date-grid" >
         <button *ngFor="let item of state">
-          <time datetime="2019-02-03">{{item.getDate()}}</time>
+          <time >{{item.getDate()}}</time>
         </button>
       </div>
     </div>

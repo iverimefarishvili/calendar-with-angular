@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { promise } from 'protractor';
 
@@ -10,8 +10,7 @@ import { promise } from 'protractor';
 
 
 export class AppComponent implements OnInit{
-
-  
+  weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   
   viewDate: Date = new Date();
 
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit{
   state: Date [] = [];
 
   ngOnInit() {
-    
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
       
       //this.state = [
@@ -80,7 +78,7 @@ export class AppComponent implements OnInit{
     }
 
     this.state.map( item => {
-      console.log(item);
+      console.log(item.getDay());
     })
   }
   
