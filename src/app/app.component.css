@@ -77,10 +77,11 @@
     margin-top: 0.5em;
   }
   
-  /* Positioning the first day */
+  /* Positioning the first day 
   .date-grid button:first-child {
     grid-column: 6;
   }
+  */
   
   
   .date-grid button {
