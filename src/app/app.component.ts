@@ -10,6 +10,8 @@ import { promise } from 'protractor';
 
 
 export class AppComponent implements OnInit{
+ 
+
   weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   
   viewDate: Date = new Date();
@@ -18,9 +20,38 @@ export class AppComponent implements OnInit{
 
   lastDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
-  state: Date [] = [];
+  state: any [] = [];
+
+
+
+  suitableday: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
+
+  newDate: Date = new Date();
 
   ngOnInit() {
+
+
+
+    this.newDate.setMonth(this.viewDate.getMonth()-1);
+
+    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay()+2);
+
+    
+    console.log(this.viewDate.getDay());
+
+    for(let i=0;i<=this.viewDate.getDay();i++) {
+        this.state.push(new Date(this.suitableday));
+
+        this.suitableday.setDate(this.suitableday.getDate()+1);
+    }
+    
+
+    
+
+
+
+
+
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
       
       //this.state = [
@@ -38,11 +69,16 @@ export class AppComponent implements OnInit{
     this.state.map( item => {
       console.log(item);
     })
+    
     //console.log(this.state)
   }
 
   next() {
+
     this.state = [];
+
+
+
 
     this.viewDate.setMonth(this.viewDate.getMonth()+1);
 
@@ -50,7 +86,29 @@ export class AppComponent implements OnInit{
 
     this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
+
+
+
+
+    this.newDate.setMonth(this.viewDate.getMonth()-1);
+
+    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
+
+    
+    console.log(this.viewDate.getDay());
+
+    for(let i=0;i<=this.viewDate.getDay();i++) {
+        this.state.push(new Date(this.suitableday));
+
+        this.suitableday.setDate(this.suitableday.getDate()+1);
+    }
+
+    
+
+    
+
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
+      
       this.state.push(new Date(this.firstDay));
 
       this.firstDay.setDate(this.firstDay.getDate()+1);
@@ -70,6 +128,23 @@ export class AppComponent implements OnInit{
     this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
 
     this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
+
+
+
+    this.newDate.setMonth(this.viewDate.getMonth()-1);
+
+    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
+
+    
+    console.log(this.viewDate.getDay());
+
+    for(let i=0;i<=this.viewDate.getDay();i++) {
+        this.state.push(new Date(this.suitableday));
+
+        this.suitableday.setDate(this.suitableday.getDate()+1);
+    }
+
+    
 
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
       this.state.push(new Date(this.firstDay));
