@@ -44,6 +44,8 @@ export class AppComponent implements OnInit{
   }
 
   next() {
+    this.state = [];
+
     this.viewDate.setMonth(this.viewDate.getMonth()+1);
 
     this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
@@ -63,6 +65,8 @@ export class AppComponent implements OnInit{
 
   
   previous() {
+    this.state = [];
+
     this.viewDate.setMonth(this.viewDate.getMonth()-1);
 
     this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
