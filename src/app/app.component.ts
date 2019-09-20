@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
 
   lastDay: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
-  state: any [] = [];
+  state: Date[] = [];
 
 
 
@@ -29,19 +29,12 @@ export class AppComponent implements OnInit{
   newDate: Date = new Date();
 
   ngOnInit() {
-
-
-
     this.newDate.setMonth(this.viewDate.getMonth()-1);
-
-    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay()+2);
-
-    
+    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.correctWeekIndex(this.viewDate)+1); 
     console.log(this.viewDate.getDay());
 
     for(let i=0;i<=this.viewDate.getDay();i++) {
         this.state.push(new Date(this.suitableday));
-
         this.suitableday.setDate(this.suitableday.getDate()+1);
     }
     
@@ -86,17 +79,18 @@ export class AppComponent implements OnInit{
 
     this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0);
 
-
+    
 
 
 
     this.newDate.setMonth(this.viewDate.getMonth()-1);
 
 
-    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
+    this.suitableday = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), this.lastDay.getDate()-this.viewDate.getDay());
 
     
-    console.log(this.viewDate.getDay());
+    console.log(this.suitableday.getDate());
+
 
     for(let i=0;i<=this.viewDate.getDay();i++) {
         this.state.push(new Date(this.suitableday));
@@ -115,9 +109,9 @@ export class AppComponent implements OnInit{
       this.firstDay.setDate(this.firstDay.getDate()+1);
     }
 
-    this.state.map( item => {
-      console.log(item);
-    })
+    //this.state.map( item => {
+    //  console.log(item);
+    //})
   }
 
   
@@ -134,12 +128,11 @@ export class AppComponent implements OnInit{
 
     this.newDate.setMonth(this.viewDate.getMonth()-1);
 
-    this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
+    this.suitableday = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), this.lastDay.getDate()-this.viewDate.getDay());
 
     
-    console.log(this.viewDate.getDay());
-
-    for(let i=0;i<=this.viewDate.getDay();i++) {
+    
+    for(let i=0;i<=this.viewDate.getDate();i++) {
         this.state.push(new Date(this.suitableday));
 
         this.suitableday.setDate(this.suitableday.getDate()+1);
@@ -154,8 +147,12 @@ export class AppComponent implements OnInit{
     }
 
     this.state.map( item => {
-      console.log(item.getDay());
+      console.log(item);
     })
+  }
+
+  private correctWeekIndex(date: Date): number {
+    return (date.getDay() + 6)%7;
   }
   
 }
