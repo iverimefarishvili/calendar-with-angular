@@ -92,6 +92,7 @@ export class AppComponent implements OnInit{
 
     this.newDate.setMonth(this.viewDate.getMonth()-1);
 
+
     this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.firstDay.getDate())-this.viewDate.getDay());
 
     
@@ -144,7 +145,7 @@ export class AppComponent implements OnInit{
         this.suitableday.setDate(this.suitableday.getDate()+1);
     }
 
-    
+
 
     for(let _item =  this.firstDay.getDate(); _item<=this.lastDay.getDate(); _item++) {
       this.state.push(new Date(this.firstDay));
