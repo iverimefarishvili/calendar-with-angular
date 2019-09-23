@@ -21,6 +21,7 @@
     "@angular/router": "~8.2.4",
     "angular-calendar": "^0.27.18",
     "bootstrap": "^4.3.1",
+    "core-js": "^2.5.7",
     "date-fns": "^2.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
