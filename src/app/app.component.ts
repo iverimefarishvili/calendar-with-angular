@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { promise } from 'protractor';
+import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,10 @@ import { promise } from 'protractor';
 
 
 export class AppComponent implements OnInit{
- 
+  public dateForm: FormGroup;
+
+  @Output() time
+
 
   weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   
@@ -31,6 +33,9 @@ export class AppComponent implements OnInit{
   
 
   ngOnInit() {
+
+    this.time = this.viewDate.getFullYear() + '-' + (this.viewDate.getMonth()+1) + '-'
+    + this.viewDate.getDate();
     this.viewDate.setMonth(this.viewDate.getMonth());
     this.newDate.setMonth(this.viewDate.getMonth()-1);
     this.suitableday = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), (this.lastDay.getDate()-this.correctWeekIndex(this.firstDay)+1)); 
@@ -160,13 +165,13 @@ export class AppComponent implements OnInit{
   private correctWeekIndex(date: Date): number {
     return (date.getDay() + 6)%7;
   }
-  
-  toggle = false;
 
 
   onclick(item: any) {
-    this.toggle = true;
-    console.log(this.toggle);
+    this.time = item.getFullYear() + '-' + (item.getMonth()+1) + '-'
+    + item.getDate();
+
+    
   }
   
 }

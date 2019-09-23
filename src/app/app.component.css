@@ -107,3 +107,6 @@
     background-color: var(--teal-100);
     color: var(--teal-900);
   }
+h1{
+  text-align: center;
+}

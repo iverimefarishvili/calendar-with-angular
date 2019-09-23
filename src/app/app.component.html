@@ -4,6 +4,7 @@
 
 
 <main>
+    <h1><input type="date" name="" value="{{ time }}"></h1>
     <div class="calendar">
       <div class="month-indicator" >
         <time datetime="2019-02">  </time>
@@ -13,7 +14,7 @@
       </div>
       <div class="date-grid" >
         <button *ngFor="let item of state">
-          <time [style.background-color]="toggle ? 'green' : 'red'" (click)="onclick(item)">{{item.getDate()}}</time>
+          <time (click)="onclick(item) ">{{item.getDate()}}</time>
         </button>
       </div>
     </div>
