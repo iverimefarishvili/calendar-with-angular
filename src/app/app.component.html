@@ -13,7 +13,7 @@
       </div>
       <div class="date-grid" >
         <button *ngFor="let item of state">
-          <time (click)="onclick(item)">{{item.getDate()}}</time>
+          <time [style.background-color]="toggle ? 'green' : 'red'" (click)="onclick(item)">{{item.getDate()}}</time>
         </button>
       </div>
     </div>
