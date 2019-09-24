@@ -14,6 +14,8 @@ export class AppComponent implements OnInit{
 
   @ViewChild("myinput", {static: false}) divView: ElementRef;
 
+  @ViewChild("element", {static: false}) item: ElementRef;
+
   @Output() time
 
 
@@ -36,6 +38,10 @@ export class AppComponent implements OnInit{
   
 
   ngOnInit() {
+    + this.viewDate.getDate();
+    //this.divView.nativeElement.value = this.viewDate.getFullYear() + '-' + (this.viewDate.getMonth()+1) + '-';
+    //this.viewDate = new Date(this.divView.nativeElement.value);
+
 
     this.time = this.viewDate.getFullYear() + '-' + (this.viewDate.getMonth()+1) + '-'
     + this.viewDate.getDate();
@@ -169,14 +175,21 @@ export class AppComponent implements OnInit{
     return (date.getDay() + 6)%7;
   }
 
+  
+  isActive = false;
 
   onclick(item: any) {
+    
+    
+    item.isActive = !item.isActive;
+    
     this.time = item.getFullYear() + '-' + (item.getMonth()+1) + '-'
     + item.getDate();
+   
   }
 
+
   findDate() {
-    console.log(this.divView.nativeElement.value);
     this.viewDate = new Date(this.divView.nativeElement.value);
     
     
@@ -201,10 +214,6 @@ export class AppComponent implements OnInit{
     this.lastDay = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), 0);
     this.suitableday = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth()-1, (this.lastDay.getDate()-this.correctWeekIndex(this.firstDay)+1)); 
 
-    
-    console.log(this.lastDay.getDate());
-
-    console.log(this.correctWeekIndex(this.firstDay));
 
     for(let i=0;i<this.correctWeekIndex(this.firstDay);i++) {
         this.state.push(new Date(this.suitableday));
@@ -223,8 +232,28 @@ export class AppComponent implements OnInit{
       this.firstDay.setDate(this.firstDay.getDate()+1);
     }
 
-    console.log(this.state);
+    this.state.map(element => {
+        var date = new Date(element);
+        var result = date.toLocaleDateString("en-GB", { 
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
+        var date2 = new Date(this.divView.nativeElement.value);
+        var result2 = date2.toLocaleDateString("en-GB", { 
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
 
+      console.log(result);
+      console.log(result2);
+      if(result2 == result) {
+        this.onclick(element);
+      }
+      
+      
+    })
   }
   
 }

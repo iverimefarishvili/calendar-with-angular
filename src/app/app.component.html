@@ -4,7 +4,7 @@
 
 
 <main>
-    <input type="date" name="" value="" #myinput> <button (click)="findDate()">Find</button>
+    <input type="date" name="" #myinput> <button (click)="findDate()">Find</button>
     <h1>{{ time }}</h1>
     <div class="calendar">
       <div class="month-indicator" >
@@ -15,7 +15,7 @@
       </div>
       <div class="date-grid" >
         <button *ngFor="let item of state">
-          <time (click)="onclick(item) ">{{item.getDate()}}</time>
+          <time (click)="onclick(item)" [ngClass]="item.isActive ? 'blue': 'white'">{{item.getDate()}}</time>
         </button>
       </div>
     </div>

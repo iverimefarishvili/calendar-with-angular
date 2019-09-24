@@ -110,3 +110,10 @@
 h1{
   text-align: center;
 }
+.blue{
+  background-color: blue;
+  color: white;
+}
+.white{
+  background-color:white;
+}
