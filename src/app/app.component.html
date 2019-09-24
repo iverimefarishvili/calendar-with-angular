@@ -5,7 +5,8 @@
 
 <main>
     <!--<input style="float: center;" type="text" [(ngModel)]="mymodel" (change)="valuechange($event)" />-->
-    <input type="text" #myInput />
+    
+    <input name=x size=10 maxlength=10 #myInput onkeyup="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')">
     <button (click)="findDate()">Find</button>
 
     <!--<input type="date" name="" #myinput> <button (click)="findDate()">Find</button>-->
