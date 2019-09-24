@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, HostListener } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,9 +10,14 @@ import { FormGroup } from '@angular/forms';
 
 export class AppComponent implements OnInit{
 
+  //@HostListener('myinput', ['$event'])
+  //handleKeyboardEvent(event: KeyboardEvent) {
+  //  alert('Key was pressed');
+  //}
+
   public dateForm: FormGroup;
 
-  @ViewChild("myinput", {static: false}) divView: ElementRef;
+  @ViewChild("myInput", {static: false}) divView: ElementRef;
 
   @ViewChild("element", {static: false}) item: ElementRef;
 
@@ -190,6 +195,7 @@ export class AppComponent implements OnInit{
 
 
   findDate() {
+    
     this.viewDate = new Date(this.divView.nativeElement.value);
     
     
@@ -251,8 +257,6 @@ export class AppComponent implements OnInit{
       if(result2 == result) {
         this.onclick(element);
       }
-      
-      
     })
   }
   

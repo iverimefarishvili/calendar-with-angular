@@ -4,7 +4,11 @@
 
 
 <main>
-    <input type="date" name="" #myinput> <button (click)="findDate()">Find</button>
+    <!--<input style="float: center;" type="text" [(ngModel)]="mymodel" (change)="valuechange($event)" />-->
+    <input type="text" #myInput />
+    <button (click)="findDate()">Find</button>
+
+    <!--<input type="date" name="" #myinput> <button (click)="findDate()">Find</button>-->
     <h1>{{ time }}</h1>
     <div class="calendar">
       <div class="month-indicator" >
