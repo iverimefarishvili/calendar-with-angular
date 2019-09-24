@@ -9,7 +9,10 @@ import { FormGroup } from '@angular/forms';
 
 
 export class AppComponent implements OnInit{
+
   public dateForm: FormGroup;
+
+  @ViewChild("myinput", {static: false}) divView: ElementRef;
 
   @Output() time
 
@@ -170,8 +173,58 @@ export class AppComponent implements OnInit{
   onclick(item: any) {
     this.time = item.getFullYear() + '-' + (item.getMonth()+1) + '-'
     + item.getDate();
+  }
+
+  findDate() {
+    console.log(this.divView.nativeElement.value);
+    this.viewDate = new Date(this.divView.nativeElement.value);
+    
+    
+
+
+    this.state = [];
+
+
+
+
+    this.viewDate.setMonth(this.viewDate.getMonth());
+
+    this.firstDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+
+    this.lastDay = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 0);
 
     
+
+    this.lastDayOfNew = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth()+1, 0);
+
+    this.newDate.setMonth(this.viewDate.getMonth());
+    this.lastDay = new Date(this.newDate.getFullYear(), this.newDate.getMonth(), 0);
+    this.suitableday = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth()-1, (this.lastDay.getDate()-this.correctWeekIndex(this.firstDay)+1)); 
+
+    
+    console.log(this.lastDay.getDate());
+
+    console.log(this.correctWeekIndex(this.firstDay));
+
+    for(let i=0;i<this.correctWeekIndex(this.firstDay);i++) {
+        this.state.push(new Date(this.suitableday));
+
+        this.suitableday.setDate(this.suitableday.getDate()+1);
+    }
+
+    
+
+    
+
+    for(let _item =  this.firstDay.getDate(); _item<=this.lastDayOfNew.getDate(); _item++) {
+      
+      this.state.push(new Date(this.firstDay));
+
+      this.firstDay.setDate(this.firstDay.getDate()+1);
+    }
+
+    console.log(this.state);
+
   }
   
 }
