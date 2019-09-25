@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, HostListener, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-root',
@@ -259,9 +261,41 @@ export class AppComponent implements OnInit{
       }
     })
   }
-  
+  iserror = false;
+  input1 = 0;
 
-  
 
-  
+  onKeydown(event) {
+    
+    if(event.target.value>=0 || event.target.value<=9 || event.target.value.toString().includes('/')) {
+      this.iserror = false;
+      if(event.target.value.toString().length == 2) {
+        this.input1 = event.target.value;
+        if(this.input1>12) {
+          this.input1 = 12;
+          
+        } else {
+          
+        }
+        event.target.value = this.input1 + '/';
+      }
+      if(event.target.value.toString().length == 5) {
+        
+        let input2 = event.target.value.toString()[3]+event.target.value.toString()[4]
+        if(input2>31) {
+          input2 = '0' + input2[0]+'/';;
+        }else {
+          input2 = input2 + '/';
+        }
+        
+        event.target.value = this.input1 + '/' + input2;
+      }
+      
+    } else {
+      event.target.value = "";
+      this.iserror = true;
+    }
+
+  }
+ 
 }
