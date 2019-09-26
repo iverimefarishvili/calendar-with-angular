@@ -7,9 +7,28 @@
     <!--<input style="float: center;" type="text" [(ngModel)]="mymodel" (change)="valuechange($event)" />-->
     
     <!--<input name=x size=10 maxlength=10 #myInput onkeyup="this.value=this.value.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'')">-->
-    <input type="text" #myInput maxlength="10" (keyup)="onKeydown($event)"/>
-    <span *ngIf="iserror" style="color: red;">is not valid input</span>
-    <button (click)="findDate()">Find</button>
+    <!--<input type="text" #myInput maxlength="10" (keyup)="onKeydown($event)">
+
+    <span *ngIf="iserror" style="color: red;">is not valid input</span>-->
+
+    <select name="DOBYear" (change)="onChange($event)">
+      <option></option>
+      <option *ngFor="let year of years">{{ year }}</option>
+    </select>
+    <select name="DOBMonth" (change)="onChange($event)">
+      <option></option>
+      <option *ngFor="let month of months">{{ month }}</option>
+    </select>
+    <select name="DOBDay" (change)="onChange($event)">
+      <option></option>
+      <option *ngFor="let day of days">{{ day }}</option>
+    </select>
+      
+
+      
+    
+    
+    <!--<button (click)="findDate()">Find</button>-->
 
     <!--<input type="date" name="" #myinput> <button (click)="findDate()">Find</button>-->
     <h1>{{ time }}</h1>

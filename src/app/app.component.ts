@@ -25,6 +25,12 @@ export class AppComponent implements OnInit{
 
   @Output() time
 
+  years = []; 
+
+  days = [];
+
+  months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+
 
   weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   
@@ -42,9 +48,20 @@ export class AppComponent implements OnInit{
 
   newDate: Date = new Date();
 
-  
+  first = 1900;
+
+  firstd = 1;
+
 
   ngOnInit() {
+    for(let a = 0; a<=200; a++) {
+      this.years.push(this.first);
+      this.first++;
+    }
+    for(let a = 0; a<31; a++) {
+      this.days.push(this.firstd);
+      this.firstd++;
+    }
     + this.viewDate.getDate();
     //this.divView.nativeElement.value = this.viewDate.getFullYear() + '-' + (this.viewDate.getMonth()+1) + '-';
     //this.viewDate = new Date(this.divView.nativeElement.value);
@@ -196,9 +213,9 @@ export class AppComponent implements OnInit{
   }
 
 
-  findDate() {
+  findDate(year, month, day) {
     
-    this.viewDate = new Date(this.divView.nativeElement.value);
+    this.viewDate = new Date(year, month, day);
     
     
 
@@ -247,7 +264,7 @@ export class AppComponent implements OnInit{
           month: "2-digit",
           day: "2-digit",
         });
-        var date2 = new Date(this.divView.nativeElement.value);
+        var date2 = new Date(this.viewDate);
         var result2 = date2.toLocaleDateString("en-GB", { 
           year: "numeric",
           month: "2-digit",
@@ -296,6 +313,27 @@ export class AppComponent implements OnInit{
       this.iserror = true;
     }
 
+  }
+  
+  year = 2019;
+  monthh = 1;
+  day = 1;
+
+
+  onChange(event) {
+    console.log(event.target.name);
+    if(event.target.name == 'DOBYear') {
+      this.year = event.target.value;
+    }
+    if(event.target.name == 'DOBMonth') {
+      this.monthh = event.target.value;
+    }
+    if(event.target.name == 'DOBDay') {
+      this.day = event.target.value;
+    }
+
+    console.log(this.year, this.monthh, this.day);
+    this.findDate(this.year, this.monthh, this.day);
   }
  
 }
